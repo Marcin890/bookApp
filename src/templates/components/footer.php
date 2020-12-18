@@ -1,0 +1,1 @@
+<p class="footer__text">Copyright - Marcin Kośka <?php echo date("Y"); ?></p>

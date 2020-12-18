@@ -1,0 +1,302 @@
+// /////////////////////////////////////////// RESET
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// /////////////////////////////////////////// VARIABLES
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap");
+$font-primary: "Open Sans", sans-serif;
+
+// Colors
+$color-primary: rgb(0, 0, 0);
+$color-secondary: rgb(58, 8, 135);
+$color-grey: rgb(230, 230, 230);
+$color-hover: rgb(58, 8, 135);
+
+// Border
+$border: 1px solid $color-primary;
+$border-radius: 7px;
+// Margin
+$margin-body: 45px 25px;
+
+// Space
+$space-xs: 7.892px;
+$space-s: 11.237px;
+$space-m: 16px;
+$space-mm: 25.629px;
+$space-l: 32.437px;
+$space-xl: 46.184px;
+$space-2xl: 93.628px;
+// Font size
+$font-xs: 0.5rem;
+$font-s: 1rem;
+$font-base: 1.3rem;
+$font-h4: 1.4625rem;
+$font-h3: 1.6rem;
+$font-h2: 2.082rem;
+$font-h1: 2.635rem;
+
+// Backgrounds
+$bg-bright: rgba(
+  $color: #ffffff,
+  $alpha: 0.2,
+);
+$bg-dark: rgba(
+  $color: #ffffff,
+  $alpha: 0.6,
+);
+$bg-hover: rgba(
+  $color: #3a0887,
+  $alpha: 0.7,
+);
+
+// Transition
+$transition: 0.3s;
+
+// Breakpoints
+$breakpoints: (
+  xs: (
+    min-width: 460px,
+  ),
+  s: (
+    min-width: 640px,
+  ),
+  m: (
+    min-width: 800px,
+  ),
+  l: (
+    min-width: 1024px,
+  ),
+  xl: (
+    min-width: 1200px,
+  ),
+);
+// Media query
+@mixin mq($breakpoint) {
+  $size: map-get($breakpoints, $breakpoint);
+  @if ($size) {
+    @media #{$size} {
+      @content;
+    }
+  } @else {
+    @error '"#{$breakpoint}" - Nie rozpoznaje';
+  }
+}
+// /////////////////////////////////////////// BASE
+// fonts
+html {
+  font-size: 10px;
+  @include mq(s) {
+    font-size: 11px;
+  }
+  @include mq(l) {
+    font-size: 11.5px;
+  }
+}
+
+body {
+  background: linear-gradient(to bottom, #e1deda 0%, #d2cec7 100%);
+}
+
+// Layout
+header {
+  padding-bottom: 50px;
+}
+.app {
+  min-height: 100vh;
+  padding: $margin-body;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  font-family: $font-primary;
+  font-weight: 100;
+  font-size: $font-base;
+  color: $color-primary;
+  @include mq(l) {
+    width: 1200px;
+  }
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex-grow: 1;
+  @include mq(l) {
+    flex-direction: row;
+  }
+}
+
+aside {
+  flex-basis: 100%;
+  @include mq(l) {
+    flex-basis: 25%;
+    padding-right: $space-l;
+  }
+}
+
+section.page {
+  flex-basis: 75%;
+}
+
+// List
+ul,
+ol {
+  list-style-type: none;
+  li {
+    margin: 0;
+  }
+}
+
+// Link
+a {
+  text-decoration: none;
+  color: $color-primary;
+  transition: $transition;
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+// Button
+button {
+  border: none;
+
+  padding: $space-s;
+  border-radius: $border-radius;
+  color: white;
+  transition: $transition;
+  margin-top: $space-l;
+  &:hover {
+    background: white;
+    color: $color-secondary;
+  }
+}
+
+// Table
+table {
+  border: none;
+  border-collapse: collapse;
+  font-size: $font-base;
+  width: 100%;
+  button {
+    margin-top: 0;
+  }
+}
+
+tr {
+  &:nth-child(odd) {
+    background: $bg-bright;
+  }
+
+  &:nth-child(even) {
+    background: $bg-dark;
+  }
+}
+thead {
+  background: $color-secondary;
+}
+
+td,
+th {
+  border: 0px;
+  padding: $space-xs 0;
+  color: $color-primary;
+  padding: 20px 5px;
+
+  @include mq(l) {
+    padding: $space-m $space-s;
+  }
+}
+th {
+  color: white;
+}
+// Form
+form {
+  margin-bottom: $space-l;
+}
+label {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-right: $space-s;
+  display: block;
+  padding-top: $space-m;
+}
+
+// Input
+input,
+textarea {
+  margin-top: $space-xs;
+  border: $border;
+  background: none;
+  padding: $space-s;
+  border-radius: $border-radius;
+  color: $color-primary;
+  transition: $transition;
+  text-align: left;
+  width: 100%;
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+textarea {
+  min-height: 100px;
+}
+
+input[type="submit"] {
+  text-align: center;
+  background: $color-secondary;
+  color: white;
+  border: none;
+}
+// Typography
+
+h1 {
+  font-size: $font-h1;
+}
+h2 {
+  // margin-top: $space-xl;
+  margin-bottom: $space-m;
+  font-size: $font-h2;
+}
+h3 {
+  margin-bottom: $space-s;
+  font-size: $font-h3;
+  margin-top: $space-m;
+}
+
+// /////////////////////////////////////////// COMPONENTS
+
+.nav {
+  &__list {
+  }
+  &__list-item {
+    font-weight: bold;
+    padding: 5px 0;
+  }
+}
+
+.footer {
+  &__text {
+    text-align: center;
+  }
+}
+
+.btn {
+  background: $color-hover;
+  &--show {
+    background: green;
+  }
+  &--delete {
+    background: red;
+  }
+}
+
+.form-error {
+  color: red !important;
+}
