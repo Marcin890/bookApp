@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class BookController extends AbstractController
 {
-    public function listAction(): void 
+    public function listAction(): void
     {
 
         $bookList = $this->abstractModel->list();
@@ -13,30 +13,37 @@ class BookController extends AbstractController
             'list',
             ['books' => $bookList]
         );
-        
     }
 
     public function editAction(): void
-  {
+    {
 
-       $noteId = (int) $this->request->postParam('id');
-      $noteData = [
-        'title' => $this->request->postParam('title'),
-        'author' => $this->request->postParam('author'),
-        'description' => $this->request->postParam('description'),
-        'date' => $this->request->postParam('date')
-      ];
-      $this->abstractModel->edit($noteId, $noteData);
-    
+        if ($this->request->isPost()) {
 
-    $this->view->render(
-      'edit',
-      ['note' => $this->getNote()]
-    );
-  }
+            $bookId = (int) $this->request->postParam('id');
 
-    public function createAction(): void 
-    {   
+
+
+            $bookData = [
+                'title' => $this->request->postParam('title'),
+                'author' => $this->request->postParam('author'),
+                'description' => $this->request->postParam('description'),
+                'date' => $this->request->postParam('date')
+            ];
+
+            var_dump($bookData);
+            $this->abstractModel->edit($bookId, $bookData);
+            header("Location: /");
+        }
+
+        $this->view->render(
+            'edit',
+            ['book' => $this->getBook()]
+        );
+    }
+
+    public function createAction(): void
+    {
         if ($this->request->hasPost()) {
             $noteData = [
                 'title' => $this->request->postParam('title'),
@@ -46,29 +53,26 @@ class BookController extends AbstractController
             ];
             $this->abstractModel->create($noteData);
             header("Location: /");
-        }      
+        }
         $this->view->render('create');
-       
     }
 
-    public function deleteAction(): void 
+    public function deleteAction(): void
     {
         $id = (int) $this->request->getParam('id');
         // var_dump($id);
         $this->abstractModel->delete($id);
         header("Location: /");
-
     }
 
-    public function showAction():void {
-        $this->view->render('show', ['note'=>$this->getBook()]);
+    public function showAction(): void
+    {
+        $this->view->render('show', ['note' => $this->getBook()]);
     }
 
-    private function getBook(): array {
+    private function getBook(): array
+    {
         $noteId = (int) $this->request->getParam('id');
         return  $this->abstractModel->get($noteId);
     }
-
-    
 }
-?>

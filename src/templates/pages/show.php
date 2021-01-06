@@ -29,9 +29,9 @@
         <?php echo $note['date'] ?>
     </p>
 
-    <!-- <a href="/?action=edit&id=<?php echo $note['id'] ?>">
+    <a href="/?action=edit&id=<?php echo $note['id'] ?>">
         <button>Edit</button>
-    </a> -->
+    </a>
     <?php else : ?>
     <div>Brak notatki do wyświetlenia</div>
     <?php endif; ?>
